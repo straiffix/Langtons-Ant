@@ -16,17 +16,17 @@ public class  main extends Application {
     public void start(final Stage primaryStage) {
         primaryStage.setTitle("Animation");
         Group root = new Group();
-        Scene scene = new Scene(root, 500, 500, Color.WHITE);
+        Scene scene = new Scene(root, 1000, 1000, Color.WHITE);
         final Color WHITE = Color.WHITE;
         final Color BLACK = Color.BLACK;
-        grid = new Rectangle[50][50];
+        grid = new Rectangle[100][100];
         int x = 0, y = 0;
-        for (int i=0; i<50;i++) {
-            for (int j=0; j<50; j++) {
+        for (int i=0; i<100;i++) {
+            for (int j=0; j<100; j++) {
                grid[i][j] = new Rectangle();
                grid[i][j].setFill(WHITE);
                grid[i][j].setStroke(BLACK);
-               grid[i][j].setStrokeWidth(.5);
+               grid[i][j].setStrokeWidth(.8);
                grid[i][j].setX(x);
                grid[i][j].setY(y);
                grid[i][j].setWidth(10);
@@ -46,7 +46,12 @@ public class  main extends Application {
 
         Automate langton = new Automate(25, 25, 2, Color.BLACK, grid);
         langton.langtonAnt();
-
+        Automate langton2 = new Automate(70, 25, 0, Color.RED, grid);
+        langton2.langtonAnt();
+        Automate langton3 = new Automate(25, 70, 1, Color.BLUE, grid);
+        langton3.langtonAnt();
+        Automate langton4 = new Automate(50, 50, 3, Color.LIGHTCORAL, grid);
+        langton4.langtonAnt();
 
 
 

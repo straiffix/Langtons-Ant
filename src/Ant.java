@@ -52,7 +52,7 @@ public class Automate {
                     } else { direction = 0;}
 
                     repaint(currentX, currentY, antColor);
-                    grid[currentX][currentY].setStroke(Color.BLACK);
+
 
                     antGo();
 
@@ -62,12 +62,12 @@ public class Automate {
                     } else { direction = 3;}
 
                     repaint(currentX, currentY, Color.WHITE);
-                    grid[currentX][currentY].setStroke(Color.BLACK);
+
                     antGo();
 
                 }
 
-                grid[currentX][currentY].setStroke(Color.RED);
+
                 testSteps++;
 
     }

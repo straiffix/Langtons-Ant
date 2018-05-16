@@ -19,23 +19,23 @@ public class Ant {
     private int antY;
     private int direction;
     private Color antColor;
-    private int testSteps=0;
+    private int testSteps = 0;
 
-    public Ant(int antX, int antY, int direction, Color antColor, Rectangle[][] grid){
+    public Ant(int antX, int antY, int direction, Color antColor, Rectangle[][] grid) {
 
         this.antX = antX;
         this.antY = antY;
         this.direction = direction;
-        this.antColor=antColor;
-        this.grid=grid;
+        this.antColor = antColor;
+        this.grid = grid;
 
     }
 
-    private void repaint(int x, int y, Color color){
+    private void repaint(int x, int y, Color color) {
         grid[x][y].setFill(color);
     } // Change color
 
-    private void antGo(){ //Change coordinate
+    private void antGo() { //Change coordinate
 
         if (direction == 0) {
             antY++;
@@ -49,48 +49,61 @@ public class Ant {
 
     }
 
-    private void step(){
+    private void step() {
 
-                if (grid[antX][antY].getFill().equals(Color.WHITE)) {
-                    if (direction != 3) {  //Change direction
-                        direction++;
-                    } else { direction = 0;}
+        if (grid[antX][antY].getFill().equals(Color.WHITE)) {
+            if (direction != 3) {  //Change direction
+                direction++;
+            } else {
+                direction = 0;
+            }
 
-                    repaint(antX, antY, antColor); // Change color
-                    antGo(); //Change place
+            repaint(antX, antY, antColor); // Change color
+            antGo(); //Change place
 
-                } else {
-                    if (direction != 0) {
-                        direction--;
-                    } else { direction = 3;}
+        } else {
+            if (direction != 0) {
+                direction--;
+            } else {
+                direction = 3;
+            }
 
-                    repaint(antX, antY, Color.WHITE);
-                    antGo();
+            repaint(antX, antY, Color.WHITE);
+            antGo();
 
-                }
+        }
 
 
-                testSteps++;
+        testSteps++;
 
     }
 
-    public void setAnt(){
+    public void setAnt() {
 
         Timer timer = new Timer();
-        timer.schedule(new TimerTask(){
+        timer.schedule(new TimerTask() {
 
-                    @Override
-                    public void run(){
-                        try {
-                        step();
-                        if(testSteps>=STEPS || antX <=0 || antX >= SIZE || antY <= 0 || antY >= SIZE) { timer.cancel();}
-                        } catch (ArrayIndexOutOfBoundsException e) { timer.cancel();}
-                            }
-                    }
+                           @Override
+                           public void run() {
+                               try {
+                                   step();
+                                   if (testSteps >= STEPS || antX <= 0 || antX >= SIZE || antY <= 0 || antY >= SIZE) {
+                                       timer.cancel();
+                                   }
+                               } catch (ArrayIndexOutOfBoundsException e) {
+                                   timer.cancel();
+                               }
+                               if (!SimulatorGlobal.simulateStopped.get()) {
+                                   setAnt();
+                               }
+                               timer.cancel();
 
-                , 1000, SPEED);
+                           }
+                       }
 
-        }
+                , 600 - SimulatorGlobal.simulateSpeed.get(), 1);
+
+    }
 
 
 }
